@@ -7,6 +7,7 @@ int main(int argc, char *argv[]) {
     vector<string> number;
     int n;
     cin >> n;
+
     for (int i = 0; i < n; i++) {
         int d;
         cin >> d;
@@ -17,6 +18,7 @@ int main(int argc, char *argv[]) {
             number.push_back(user);
             counter++;
         }
+        
         string remember;
         cin >> remember;
         cout << "Case " << i + 1 << ":" << endl;
