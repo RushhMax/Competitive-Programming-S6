@@ -14,15 +14,10 @@ using namespace std;
 
 int main(){
     string input;
-    // bool empty = false;
     int k = 0;
-    // for(int k= 0; k<100; k++){
 
     while(getline(cin, input)) {
         int matriz[3][3] = { 0 };
-        if(!input.empty()) {
-
-            
             for(int i=0; i<input.size(); i++) {
                 if(input[i] == 'a'){
                     matriz[0][0]++;
@@ -78,16 +73,17 @@ int main(){
                 }        
             }
         
-
-        cout<<"Case #"<<k+1<<": \n";
-        for(int i=0; i<3; i++){
-            for(int j=0; j<2; j++){
-                cout << matriz[i][j]%10 << " ";
+            k++;
+            if(k>1){ cout<<endl; }
+            cout<<"Case #"<<k<<": \n";
+            for(int i=0; i<3; i++){
+                for(int j=0; j<3; j++){
+                    if(j<2) cout << matriz[i][j]%10 << " ";
+                    else cout << matriz[i][j]%10 ;
+                }
+                if(i < 2) cout<<endl;
             }
-            
-            cout<<matriz[i][2]%10 <<endl;
-        }
-        k++;
     }
-    
+    cout<<endl;
+    return 0;
 }
