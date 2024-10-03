@@ -29,17 +29,7 @@ void solve(){
             if(pointsDOWN.find(x) != pointsDOWN.end()) contT += n-2;
             pointsUP[x]++;
         }
-    }
-//     cout<<"PRINT"<<endl;
-//
-//     for(auto it = pointsDOWN.begin(); it != pointsDOWN.end(); it++){
-//         cout<<it->first<<" "<<it->second<<endl;
-//     }
-// cout<<"PRINT"<<endl;
-//     for(auto it = pointsUP.begin(); it != pointsUP.end(); it++){
-//         cout<<it->first<<" "<<it->second<<endl;
-//     }
-    
+    } 
 
     for(auto it = pointsDOWN.begin(); it != pointsDOWN.end(); it++){
         if(pointsDOWN.find(it->first + 2) != pointsDOWN.end()){
@@ -58,7 +48,6 @@ void solve(){
     }
 
     cout<<contT<<endl;
-
 }
 
 int main() {
