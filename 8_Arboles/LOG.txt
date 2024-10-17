@@ -1,0 +1,24 @@
+b = 5
+sg = 1
+sb = 1
+green = 10 
+blue = 10 
+Comparing: 10 vs 10
+green and blue died
+
+b = 2
+sg = 2
+sb = 3
+green = 10 20 
+blue = 10 10 15 
+Comparing: 20 vs 15
+20
+Comparing: 10 vs 10
+green wins
+5
+
+b = 0
+sg = 0
+sb = 0
+green and blue died
+

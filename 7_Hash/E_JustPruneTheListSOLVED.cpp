@@ -17,23 +17,15 @@ void solve(){
         cin>> aux;
         numbers1[aux]++;
     }
- 
+
     for(int i=0;i<m;i++){
         cin>>aux;
         numbers2[aux]++;
     }   
 
-    // for (const auto &pair : numbers1) {
-    //     std::cout << pair.first << ": " << pair.second << std::endl;
-    // }
+    int cont = 0;
+    map<int, int> done;
 
-    //  for (const auto &pair : numbers2) {
-    //     std::cout << pair.first << ": " << pair.second << std::endl;
-    // }
-   
-   int cont = 0;
-   map<int, int> done;
-       
     for (const auto &pair : numbers1) {
         bool found = false;
         for (const auto &pair2 : numbers2) {
@@ -51,10 +43,6 @@ void solve(){
         }
     }
 
-    // for (const auto &pair : done) {
-    //     std::cout << pair.first << ": " << pair.second << std::endl;
-    // }
-
     for (const auto &pair : numbers2) {
         bool found = false;
         for (const auto &pair2 : numbers1) {
@@ -71,13 +59,7 @@ void solve(){
             done[pair.first]++;
         }
     }
-
-    //     for (const auto &pair : done) {
-    //     std::cout << pair.first << ": " << pair.second << std::endl;
-    // }
-
     cout<<cont<<endl;
-
 }
 
 
