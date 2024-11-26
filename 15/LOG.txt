@@ -1,0 +1,54 @@
+
+Data: 5
+0 3
+sumando 5 0 3
+suma 5
+0 3 
+2 4
+suma 5
+
+sumando 5 2 4
+suma 10
+0 3 
+2 4 
+
+Data: 6
+3 5
+Insertnado: 5
+suma 16
+
+suma 16
+0 2 3 4 5 
+
+Data: 7
+0 1
+Insertnado: 1
+suma 23
+
+0 1 2 3 4 5 
+1 4
+0 1 2 3 4 5 
+
+Data: 8
+1 2
+0 1 2 3 4 5 
+4 5
+0 1 2 3 4 5 
+
+Data: 9
+1 3
+0 1 2 3 4 5 
+4 6
+Insertnado: 6
+suma 32
+
+0 1 2 3 4 5 6 
+
+Data: 11
+5 6
+0 1 2 3 4 5 6 
+
+Data: 15
+3 4
+0 1 2 3 4 5 6 
+MIn 90 32 58

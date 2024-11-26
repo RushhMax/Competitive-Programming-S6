@@ -56,80 +56,43 @@ using pqg = priority_queue<T, vector<T>, greater<T>>; // Min Heap
 /* ############################################################################################## */
 
 void solve(){
-    vector<set<char>> connecteds;
-    string line;
-    while (getline(cin, line) && line[0] != '*'){
-        char FE = line[1];
-        char SE = line[3];
-        vector<int> found;
-        //cout<<"Checking for "<<FE<<" "<<SE<<endl;
-        f(i,connecteds.size()){
-            if(connecteds[i].find(FE) != connecteds[i].end()){
-                connecteds[i].insert(SE);
-                found.push_back(i);
-            }
-            if(connecteds[i].find(SE) != connecteds[i].end()){
-                connecteds[i].insert(FE);
-                found.push_back(i);
-            }
-            if(found.size() == 2 && found[0] != found[1]){
-                connecteds[found[0]].insert(all(connecteds[found[1]]));
-                connecteds.erase(connecteds.begin()+found[1]);
-                break;
-            }
+    int n,m;    
+    while(cin>>n>>m){
+        vector<int> arr;
+        f(i,n){
+            int x;cin>>x;
+            arr.push_back(x);
         }
-        if(found.size() == 0){ 
-            connecteds.push_back({FE, SE});
-        }else{
-            found.clear();
-        }
-    }
-    
-    getline(cin, line);
-    stringstream edges(line);
-    while(getline(edges, line, ',')){
-        char E = line[0];
-        bool found = false;
-        f(i,connecteds.size()){
-            if(connecteds[i].find(E) != connecteds[i].end()){
-                found = true;
-                break;
-            }
-        }
-        if(!found){
-            //cout<<" Inserting new subset with "<<E<<endl;
-            connecteds.push_back({E});
-        }
-    }
+        f(i,m){
+            int k,v;
+            cin>>k>>v;
 
-    int subtree = 0, acorn=0; 
-    f(i,connecteds.size()){
-        if(connecteds[i].size() > 1){
-            // cout<<"Subtree: \n";
-            // FOR(it,connecteds[i]){
-            //     cout<<(*it)<<" ";
-            // }cout<<endl;
-            subtree++;
-        }
-        if(connecteds[i].size() == 1){
-            // cout<<"Acorn: \n";
-            // FOR(it,connecteds[i]){
-            //     cout<<(*it)<<" ";
-            // }cout<<endl;
-            acorn++;
+            bool doit = false;
+            int cont = 0;
+            f(i, arr.size()){
+                if(arr[i] == v){
+                    cont++;
+                }
+                if(cont == k){
+                    cout<<i+1<<endl;
+                    doit = true;
+                    break;
+                }
+            }
+            if(!doit) cout<<"0"<<endl;
         }
     }
-    cout << "There are " << subtree << " tree(s) and " << acorn << " acorn(s)." << endl;
 }
 
 int main(){
     _FasterIO_ // Uncomment for improve runtime
-    //_log_			//Uncomment for redirect output to LOG.txt
+    _log_			//Uncomment for redirect output to LOG.txt
 
-    int tc;cin >> tc;cin.ignore();
-    for (int i = 1; i <= tc; i++){
-        solve();
-    }
+    solve();
+    //int tc;cin >> tc;cin.ignore();
+    //for (int i = 1; i <= tc; i++){
+    //    solve();
+    //}
 
     //_time_			//Uncomment for show runtime
 }
