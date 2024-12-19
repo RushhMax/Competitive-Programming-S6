@@ -57,21 +57,32 @@ int dy[] = { 0, -1, 1, 0};
 int main(){
 	//__FasterIO__
 	//__log__	
-    
-
+    //int tc;
+    //cin>>tc;
+    //while(tc--){
     int R,C; cin >> R >> C;
     vector<vector<char>> maze(R, vector<char>(C));
-    vpii fire;
     
-    int JX, JY;   
+    int JX, JY;  
+    vpii fire;
     f(i,R) f(j,C){
         cin >> maze[i][j];
         if(maze[i][j] == 'J') JX = i, JY = j;
-        if(maze[i][j] == 'F') fire.pb({i,j});
+        if(maze[i][j] == 'F') fire.push_back({i,j});
     }
 
     auto ok = [&](int x, int y){
-        return x>=0 && x<R && y>=0 && y<C && maze[x][y] != '#' && maze[x][y] != 'F';
+        return x>=0 && x<R && y>=0 && y<C && maze[x][y] == '.';
+    };
+
+    auto print = [&](){
+        cout<<"PRINT"<<endl;
+        f(i,R){
+            f(j,C){
+                cout << maze[i][j];
+            }
+            cout << endl;
+        }
     };
 
     auto safe = [&](int x, int y){
@@ -80,44 +91,50 @@ int main(){
 
     auto expandFire = [&](){
         vpii newFire;
-        f(i, fire.size()){
-            int x = fire[i].ff;
-            int y = fire[i].ss;
+        f(i,sz(fire)){
+            auto [x,y] = fire[i];
             f(k,4){
                 int nx = x + dx[k];
                 int ny = y + dy[k];
                 if(ok(nx,ny)){
                     maze[nx][ny] = 'F';
-                    newFire.pb({nx,ny});
+                    newFire.push({nx,ny});
                 }
             }
         }
-        fire.insert(fire.end(), all(newFire));
+        fire = newFire;
     };
 
     int ans = -1;
     map<pii,int> vis;
     function<void(int, int, int)> dfs = [&](int x, int y, int deep){
         vis[{x,y}] = 1;
+        //print();
+        if(safe(x,y)){
+            //cout << "SAFE" << x << " " << y << endl;
+            //_(deep);
+            //_(ans);
+            ans = (ans == -1 ? deep : min(ans,deep));
+            vis[{x,y}] = 0;
+            return;
+        }
         expandFire();
         f(k,4){
             int nx = x + dx[k];
             int ny = y + dy[k];
             if(ok(nx,ny) && !vis[{nx,ny}]){
-                if(safe(nx,ny)){
-                    ans = deep;
-                    return;
-                }
+                //cout << "DFS at (" << x << ", " << y << ") with depth " << deep << endl;
                 dfs(nx,ny,deep+1);
             }
         }
-        
+        vis[{x,y}] = 0;
     };
 
 
     dfs(JX,JY,1);
 
     if(ans == -1) cout << "IMPOSSIBLE" << endl;
-    else cout << ans+1 << endl;
+    else cout << ans << endl;
 	//__time__			//Uncomment for show runtime
+    //}
 }
