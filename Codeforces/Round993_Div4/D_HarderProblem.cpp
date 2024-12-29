@@ -4,37 +4,42 @@ using namespace std;
 
 #define ll long long
 
-#define __log__ { std::FILE* file = std::freopen("LOG.txt", "w", stdout); }
-
-
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    //__log__;
+
     int tc;cin>>tc;
     while(tc--){
-        ll n;cin>>n;
-        ll maxi = 1;
-        map<ll,ll> cont;
-        vector<ll> b(n);
-        for(ll i=0;i<n; i++){
-            ll a;cin>>a;
-            cout<<" INsertando "<<a<<" "<<maxi<<endl;
-            if(cont[a] < maxi){
-                cout<<"Entra"<<endl;
-                ll j = i;
-                while(cont[a] < maxi){
-                    cont[b[j-1]]--;
-                    maxi = cont[b[j-1]];
+        int n;cin>>n;
+        int moda = 1;
+        map<int, int> modas; 
+        vector<int> b(n,0);
+        for(int i=0;i<n; i++){
+            int a;cin>>a;
+            cout<<a<<" "<<modas[a]<<" "<<moda<<endl;
+            if(modas[a] < moda){
+                cout<<"entra1"<<endl;
+                int j = i;
+                while(moda - modas[a] > 0){
+                    if(j < 0) break;
+                    
                     b[j] = a;
-                    cont[a]++;
+                    modas[a]++;
+
+                    if(b[j] != 0){
+                        modas[b[j]]--;
+                        moda =  max(modas[a], modas[b[j]]);
+                    }else{
+                        moda =  max(moda,modas[a]);
+                    }
                     j--;
                 }
             }else{
-                cout<<"No entra"<<endl;
+                cout<<"entra2"<<endl;
                 b[i] = a;
-                cont[a]++;
-                maxi = cont[a];
+                modas[a]++;
+                moda = modas[a];
+                cout<<"moda "<<moda<<endl;
             }
         }
 

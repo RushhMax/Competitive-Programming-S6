@@ -1,20 +1,34 @@
 #include<bits/stdc++.h>
 
+#define ll long long
+
 using namespace std;
 
 
-1 2 9 10 25 26
-4 3 8 11 24 27
-5 6 7 12 23 28
-16 15 14 13 22 29
-17 18 19 20 21 30
-36 35 34 33 32 31
-37 38 39 40 41 
-
-// 1 3 5 7
-// 2 4 6 8
-
-
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
+    int tc;cin>>tc;
+    while(tc--){
+        ll i, j;cin>>i>>j;
 
+        if(max(i,j) == i){
+            if(i%2==0){
+                ll top = pow(i,2);
+                cout<<top-j+1<<endl;
+            }else{
+                ll down = pow(i-1,2);
+                cout<<down+j<<endl;
+            }
+        }else{
+            if(j%2==0){ 
+                ll down = pow(j-1,2);
+                cout<<down+i<<endl;
+            }else{ 
+                ll top = pow(j,2);
+                cout<<top-i+1<<endl;
+            }
+        }
+    }
+}
