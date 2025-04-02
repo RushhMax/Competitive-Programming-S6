@@ -1,0 +1,82 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    int v,e;
+    int tc = 1;
+    while(cin>>v>>e){
+        if(v == e && v == 0) break;
+
+        vector<int> time(v+1);
+        int allTImes = 0;
+        for(int i=1; i<=v;i++){
+            cin>>time[i];
+            allTImes += time[i];
+        }
+
+        vector<vector<int>> adj(v+1);
+        vector<vector<int>> dependencias(v+1);
+
+        for(int i=0; i<e; i++){
+            int a,b;cin>>a>>b;
+            adj[a].push_back(b);
+            dependencias[b].push_back(a);
+        }
+
+
+        for(int i=1; i<=v;i++){
+            cout<<i<<" ";
+            for(int j=0; j<dependencias[i].size(); j++){
+                cout<<dependencias[i][j]<<" ";
+            }
+            cout<<endl;
+        }
+
+        int q;cin>>q;
+        cout<<"Case #"<<tc++<<endl;
+        while(q--){
+            int query;cin>>query;
+            // todos los que no dependan de el
+            queue <int> q;
+            vector<bool> used(v+1, false);
+            q.push(query);
+            used[query] = true;
+
+            while(!q.empty()){
+                int p = q.front();q.pop();
+
+                cout<<"mi p"<<p<<endl;
+                for(int j=0; j<dependencias[p].size(); j++){
+                    cout<<"dependencias"<<dependencias[p][j]<<endl;
+                    if(used[dependencias[p][j]]) continue;
+                    q.push(dependencias[p][j]);
+                    used[dependencias[p][j]] = true;
+                    allTImes -= time[dependencias[p][j]];
+                }
+            }
+
+            // el minimo para hacerlo 
+            int Min = 0;
+            
+            used.assign(v+1, false);
+
+            q.push(query);
+            used[query] = true;
+
+            while(!q.empty()){
+                int p = q.front();
+                q.pop();
+
+                for(int j=0; j<adj[p].size(); j++){
+                    if(used[adj[p][j]]) continue;
+                    q.push(adj[p][j]);
+                    used[adj[p][j]] = true;
+                    Min += time[adj[p][j]];
+                }
+            }
+
+            cout<<allTImes-Min<<endl;
+        }
+    }
+}
